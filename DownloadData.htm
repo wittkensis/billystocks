@@ -1,0 +1,44 @@
+<html>
+
+<head>
+
+<title>Download Stock Data</title>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript" src="http://t.wits.sg/misc/jQueryProgressBar/js/jquery.progressbar.min.js"></script>
+<script type="text/javascript" src="http://t.wits.sg/misc/js/jQuery/chili/jquery.chili-2.2.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#uploadprogressbar").progressBar();
+});
+
+var i = setInterval(function() { 
+	$.getJSON("http://ericwittke.com/stocks/PullData.php", function(data) {
+		if (data == null) {
+			clearInterval(i);
+			location.reload(true);
+			return;
+		}
+
+		var percentage = data.progress;
+		$("#uploadprogressbar").progressBar(percentage);
+	});
+}, 1500);
+
+</script>
+
+</head>
+
+<body>
+
+<button>Download</button>
+
+<div id="uploadprogressbar"></div>
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript" src="http://t.wits.sg/misc/jQueryProgressBar/js/jquery.progressbar.min.js"></script>
+<script type="text/javascript" src="http://t.wits.sg/misc/js/jQuery/chili/jquery.chili-2.2.js"></script>
+
+</body>
+
+</html>
